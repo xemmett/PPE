@@ -1,0 +1,7 @@
+Hypothesis' of the education system:
+
+- It is getting harder to get into college
+- There is unregulated over-spending
+- College can be 100% free
+- Correlation with candidate points and housing scarcity
+- Inconsiticy with the cao points e.g 2001, 2002, error of 0.1%

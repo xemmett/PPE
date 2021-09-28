@@ -1,0 +1,142 @@
+body { 
+        background: #FFFFFF;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+	margin-top: 0;
+	margin-left: 3%;
+	margin-right: 3%;
+        }
+
+
+p	{
+	color: black;
+	font-family: Arial, sans-serif;
+	font-size: small;
+	}
+
+
+h1 {
+	color: green;
+        font-family: Arial, sans-serif;
+	text-align: center;
+	font-size: x-large;
+	font-weight: bold;
+	}
+
+h2 {
+	color: green;
+        font-family: Arial, sans-serif;
+	text-align: center;
+	font-size: large;
+	}
+
+
+
+h4	{
+	color: blue;
+	text-align: left;
+	font-size: large;
+	}
+
+
+a:link, a:visited {color: BLUE; font-weight: bold; text-decoration: none; !important; background: #F8FFFF; }
+a:hover, a:active {color: RED !important; font-weight: bold; background: yellow !important; text-decoration: none; } 
+
+
+
+pre { font-family: monospace; }
+
+
+table {
+	color: black;
+        font-size: 10pt;
+	padding-top: 1px;
+	padding-bottom: 0px;
+        }
+
+th	{ 
+        text-align: center; 
+        vertical-align: top; 
+        }
+
+td	{ 
+        text-align: LEFT; 
+        vertical-align: top; 
+        }
+
+td.num	{ 
+        text-align: right; 
+        vertical-align: top; 
+        }
+
+
+
+dt {
+        font-family: monospace;
+        font-weight: bold;
+        } 
+        
+        
+table.mini
+	{
+	color: black;	
+	background: black;
+        font-size: x-small;
+	padding-top: 0px;
+	padding-bottom: 0px;
+
+
+
+
+
+
+
+        }
+
+table.mini th
+	{
+        text-align: center; 
+        vertical-align: top; 
+	background: red;
+	color: yellow;
+        }
+
+table.mini td
+	{
+	BACKGROUND: white;
+	}
+
+        
+
+
+ul { list-style: square; }
+ul ul { list-style: disc; }     
+ul ul ul { list-style: square; }
+
+
+ol { list-style: decimal; }
+ol ol { list-style: lower-alpha; }
+ol ol ol { list-style: upper-roman; }
+
+/*
+     FILE ARCHIVED ON 00:44:17 Dec 06, 2001 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 16:30:05 Jun 19, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 726.405
+  exclusion.robots: 0.084
+  exclusion.robots.policy: 0.076
+  RedisCDXSource: 27.306
+  esindex: 0.008
+  LoadShardBlock: 676.276 (3)
+  PetaboxLoader3.datanode: 702.881 (4)
+  CDXLines.iter: 19.706 (3)
+  load_resource: 97.149
+  PetaboxLoader3.resolve: 41.691
+*/

@@ -1,0 +1,111 @@
+body { 
+        background: #FFFFFF;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+	margin-top: 0;
+	margin-left: 3%;
+	margin-right: 3%;
+        }
+
+P	{
+	color: black;
+	font-family: Arial, sans-seriv;
+	font-size: small;
+	}
+
+
+h1 {
+	color: black;
+        font-family: Arial, sans-serif;
+	text-align: center;
+	font-size: x-large;
+	font-weight: bold;
+	}
+
+h2 {
+	color: black;
+        font-family: Arial, sans-serif;
+	text-align: center;
+	font-size: large;
+	}
+
+
+h4	{
+	color: black;
+	text-align: center;
+	font-size: large;
+	}
+
+
+a:link, a:visited {color: BLACK; font-weight: bold; text-decoration: none; !important; background: #FFFFFF; }
+a:hover, a:active {color: BLACK !important; font-weight: bold; background: yellow !important; text-decoration: none; } 
+
+
+
+pre { font-family: monospace; }
+
+
+table {
+	color: black;
+        font-size: 10pt;
+	padding-top: 1px;
+	padding-bottom: 0px;
+        }
+
+th	{ 
+        text-align: center; 
+        vertical-align: top; 
+        }
+
+td	{ 
+        text-align: LEFT; 
+        vertical-align: top; 
+        }
+
+td.num	{ 
+        text-align: right; 
+        vertical-align: top; 
+        }
+
+
+
+dt {
+        font-family: monospace;
+        font-weight: bold;
+        } 
+        
+        
+        
+
+
+ul { list-style: square; }
+ul ul { list-style: disc; }     
+ul ul ul { list-style: square; }
+
+
+ol { list-style: decimal; }
+ol ol { list-style: lower-alpha; }
+ol ol ol { list-style: upper-roman; }
+
+/*
+     FILE ARCHIVED ON 01:02:09 Dec 06, 2001 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 16:30:06 Jun 19, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 143.497
+  exclusion.robots: 0.141
+  exclusion.robots.policy: 0.128
+  RedisCDXSource: 2.536
+  esindex: 0.011
+  LoadShardBlock: 116.834 (3)
+  PetaboxLoader3.datanode: 173.599 (4)
+  CDXLines.iter: 20.216 (3)
+  load_resource: 267.617
+  PetaboxLoader3.resolve: 135.334
+*/
