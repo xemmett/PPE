@@ -1,3 +1,9 @@
+"""
+Generation of the recommendation model. 
+Author: Emmett Lawlor
+Date: 22/6/21
+"""
+
 import pickle
 from pandas import read_csv, DataFrame
 from sklearn.feature_extraction.text import TfidfVectorizer

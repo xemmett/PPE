@@ -4,7 +4,6 @@
 # next step, run sort_Search_results.py
 # Author: Emmett Lawlor
 
-from selenium import webdriver
 import pandas as pd
 
 def get_results(driver):

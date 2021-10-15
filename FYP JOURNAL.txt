@@ -1,0 +1,28 @@
+3 options 03/10/2021:
+
+- cv (computer vision, Tesseract): taking images of what the bot sees
+converting the image into a timetable using tabular, scrapy or with PIL
+
+issue with tabular: tabular acts funky when you have 2 pages, it realies heavily on inputted
+tables to be fully bordered, otherwise it can read them both into two different dataframes, casuing double the work.
+
+issue with Tesseract:
+PIL can be used to change the images gradient to make edges and colors to standout making it easier to read, Tesseract is a cv tool to read text from images, it would be a lot of text
+data processing unless we also used PILS with Tesseract to define borders and go cell by cell to read information.
+
+^^ these are all emulations of human eyes and brains, we scour, we scan, we take information and go.
+
+Scrapy:
+Scrapy is realistically the best, basic HTML web scraping, I do believe though, in future we will not be allowed access to the HTML of a website. Every day it becomes harder and harder.
+Human eye and computer processing is what the future of rapid web scraping will be. As tesseract evolves and more tools are built for these open source powerful tools.
+
+
+Completed 04/10/2021:
+- qualifax_course_scraper.py finished.
+- spoke to denis moore about setting up my raspberry pi in the server room.
+- 
+
+Process:
+
+Scrapers > main.py
+recommendation_model > preprocessors.py

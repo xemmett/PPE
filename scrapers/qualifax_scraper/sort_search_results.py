@@ -37,8 +37,8 @@ def sortdata():
     columns.pop(columns.index('[provider, link]'))
     cleaned_df.to_csv('data/cleaned_search_results.csv', encoding='utf8')
 
-def searchSort():
-    df = pd.read_csv('data/qualifax_search_results.csv', encoding='utf8')
+def searchSort(read_from : str, destination_file : str):
+    df = pd.read_csv(read_from, encoding='utf8')
     columns = list(df.columns)
     cleaned_df = DataFrame([], columns=columns)
 
@@ -52,8 +52,10 @@ def searchSort():
 
             row[name] = provider[0]
             row[link] = provider[1]
+            
+            index+=1
 
         cleaned_df = cleaned_df.append(row)
 
     cleaned_df = cleaned_df.drop(columns='[provider, link]')
-    cleaned_df.to_csv('data/cleaned_search_results.csv', encoding='utf8')
+    cleaned_df.to_csv(destination_file, encoding='utf8')

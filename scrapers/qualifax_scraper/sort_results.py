@@ -19,9 +19,9 @@ def definedf(dataset={}):
     
     return df
 
-def sortResults():
-    with open("data/results.json", 'r') as coursesjson:
-        courses = json.load(coursesjson)
+def sortResults(read_from: str, destination_file: str):
+    with open(read_from, 'r') as coursesjson:
+        courses = load(coursesjson)
     
     masterdf = definedf(dataset=courses)
     
@@ -29,5 +29,4 @@ def sortResults():
         df = pd.json_normalize(course)
         masterdf = masterdf.append(df)
     
-    masterdf.to_csv("data/master_courses.csv")
-
+    masterdf.to_csv(destination_file, encoding='utf8', index=0)

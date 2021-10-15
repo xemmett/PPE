@@ -1,5 +1,6 @@
 # produces results.json
 # reads from cleaned_search_results.csv
+# 29/09/2021
 # Author: Emmett Lawlor
 
 from selenium import webdriver
@@ -80,14 +81,14 @@ def define_course(table):
         course[column_name] = column_value
     return course
 
-def getCoursePage(driver):
-    search_results = pd.read_csv('data/cleaned_search_results.csv')
+def getCoursePage(driver, read_from:str, destination_file: str):
+    search_results = pd.read_csv(read_from)
     courses = []
     errors=0
     errorenous_links = []
     for i,row in search_results.iterrows():
         sleep(1.5)
-        with open('data/results.json', 'w+', encoding='utf8') as of:
+        with open(destination_file, 'w+', encoding='utf8') as of:
             link = row['link']
             driver.get(link)
             try:
