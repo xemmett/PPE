@@ -20,9 +20,25 @@ Human eye and computer processing is what the future of rapid web scraping will 
 Completed 04/10/2021:
 - qualifax_course_scraper.py finished.
 - spoke to denis moore about setting up my raspberry pi in the server room.
-- 
 
 Process:
 
 Scrapers > main.py
 recommendation_model > preprocessors.py
+
+john nelson -> steve walker -> chris kelly -> web3.0 -> semantic analysis of data; googling "i love x" and "i <3 x" != the future
+
+first_coherence_test.png -> using tokenizer & stemming
+    number_of_topics = 6
+    words = 10
+
+model output:
+
+
+second_coherence_test.png -> removed punctuation from fulldesc, using tokenizer & lemmatization
+params:
+    number_of_topics = 5
+    words = 10
+
+model output:
+[(0, '0.314*"student" + 0.256*"course" + 0.250*"programme" + 0.217*"skill" + 0.194*"study" + 0.190*"year" + 0.169*"graduate" + 0.145*"module" + 0.142*"research" + 0.141*"career"'), (1, '0.308*"module" + 0.274*"open" + 0.263*"credit" + 0.246*"pathway" + 0.242*"learning" + 0.187*"entry" + -0.182*"course" + 0.169*"ucd" + 0.140*"used" + 0.138*"mature"'), (2, '-0.648*"subject" + -0.203*"group" + -0.189*"year" + -0.166*"double" + -0.163*"15" + -0.148*"credit" + -0.132*"study" + -0.125*"degree" + -0.125*"taken" + 0.123*"course"'), (3, '0.427*"course" + -0.408*"research" + 0.312*"business" + 0.298*"management" + -0.182*"student" + -0.179*"programme" + 0.152*"marketing" + 0.132*"level" + 0.130*"online" + -0.117*"graduate"'), (4, '-0.480*"business" + 0.388*"course" + -0.335*"management" + 0.242*"education" + -0.209*"programme" + 0.186*"care" + 0.158*"level" + 0.125*"subject" + -0.124*"marketing" + 0.109*"health"')]
