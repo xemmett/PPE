@@ -31,14 +31,15 @@ lemmatizer = WordNetLemmatizer()
 
 # open data
 
-def open_data(filename=r"..\..\scrapers\qualifax_scraper\data2020\results.csv"):
+def open_data(filename=r"../../scrapers/qualifax_scraper/data/master_courses.csv"):
     documents = []
     titles = []
 
     dataset = read_csv(filename, encoding='utf8', low_memory=False)
 
-    columns = ['careers_or_further_progression', 'course_name', 'course_content',
-               'attendance_options', 'location_(districts)']
+    columns = ['course_name',] 
+            #     'course_content',
+            #    'attendance_options', 'location_(districts)', 'careers_or_further_progression', ]
     df = DataFrame([], columns=columns)
     for c in columns:
         df[c] = dataset[c]
@@ -88,7 +89,7 @@ class LsaModel():
             raw = d.lower()
             tokens = tokenizer.tokenize(raw)
             stopped_tokens = [
-                x for x in tokens if not x in en_stop and len(x) > 3]
+                x for x in tokens if not x.replace('\n', ' ').strip() in en_stop and len(x) > 3]
             reduced_tokens = tm(stopped_tokens)
             texts.append(reduced_tokens)
 
@@ -149,13 +150,12 @@ class LsaModel():
         plt.legend(("coherence_values"), loc='best')
         plt.show()
 
-    def __init__(self, token_method='lemmatize', number_of_topics=5, num_words=10, power_iters=4, document_stop_index=None) -> None:
+    def __init__(self, token_method='lemmatize', number_of_topics=5, num_words=10, power_iters=4, document_stop_index=None):
         print("start")
         self.number_of_topics = number_of_topics
         self.num_words = num_words
-
         training_docs, self.titles, _ = open_data(
-            filename=r"..\..\scrapers\qualifax_scraper\data2020\results.csv")
+            filename=r"../../scrapers/qualifax_scraper/data2020/results.csv")
         print("cleaning text")
         self.training_docs = training_docs
 
@@ -166,7 +166,6 @@ class LsaModel():
         print("creating lsa model")
         self.model = self.create_gensim_lsa_model(
             self.documents, number_of_topics, num_words, power_iters=power_iters)
-
 
 lm = LsaModel(document_stop_index=7500)
 
@@ -179,15 +178,9 @@ _, _, df = open_data()
 
 df['topic'] = ''
 df['similarity'] = ''
-for i, row in df:
-    new_text_corpus = lm.dictionary.doc2bow(row.full_desc.split())
+
+print(lm.model.print_topics())
+for i, row in df[:5].iterrows():
+    new_text_corpus = lm.dictionary.doc2bow(row.fulldesc.split())
     # lm.model[new_text_corpus]
-
-    for c in lm.model[new_text_corpus]:
-        # [(Topics, Perc Contrib)]
-        print("Document Topics      : ", c[0], c[1])
-        # [(Word id, [Topics])]
-        print("Word id, Topics      : ", topics[topic_indexes.index(c[0])])
-
-        row['topic_{}'] = c[0]
-        row['similarity'] = c[1]
+    print(lm.model[new_text_corpus])

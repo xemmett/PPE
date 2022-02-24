@@ -5,7 +5,6 @@
 
 import ast
 import pandas as pd
-from pandas.core.base import DataError
 from pandas.core.frame import DataFrame
 
 def sortdata():

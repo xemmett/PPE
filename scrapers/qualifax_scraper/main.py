@@ -17,7 +17,7 @@ def main():
     # searchSort(read_from = 'data/qualifax_search_results.csv', destination_file = 'data/cleaned_search_results.csv') # produces cleaned_search_results.csv
     getCoursePage(driver=driver, read_from='data/cleaned_search_results.csv', destination_file = 'data/results.json') # produces results.json
     
-    sortResults(read_from = "data/sample_results.json", destination_file = "data/master_courses.csv") # produces results.csv -> master_courses.csv
+    sortResults(read_from = "data/results.json", destination_file = "data/master_courses.csv") # produces results.csv -> master_courses.csv
     print("completed.")
 
 main()
