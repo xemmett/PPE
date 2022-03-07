@@ -30,6 +30,8 @@ def prepareandfitvect(dataset):
     # removes stop_words like if, the, then, will, common ones
     vectorizer = TfidfVectorizer(stop_words='english')
     X = vectorizer.fit_transform(cleaned_df['fulldesc'])
+    print(X.shape)
+    print(vectorizer.build_preprocessor())
     return vectorizer
 
 def predict_cluster(input_str):
@@ -102,7 +104,7 @@ def clusterexistingdata(df):
     return df
 
 def startup():
-    coursedf = read_csv(r'C:\Users\Emmett\fyp\scrapers\qualifax_scraper\data2020\results.csv', encoding='utf8', low_memory=False)
+    coursedf = read_csv(r'../../scrapers/qualifax_scraper/data2020/results.csv', encoding='utf8', low_memory=False)
     coursedf['cluster_prediction'] = ""
     cao_courses = coursedf # .loc[coursedf.course_type == "Higher Education CAO"].reset_index()
     cao_courses = clusterexistingdata(cao_courses)
@@ -115,11 +117,11 @@ def main():
 
 filename = '8_clustermodel.sav'
 model = pickle.load(open(filename, 'rb'))
-dataset = r'C:\Users\Emmett\fyp\scrapers\qualifax_scraper\data2020\results.csv'
+dataset = r'../../scrapers/qualifax_scraper/data2020/results.csv'
 dataset = read_csv(dataset, encoding='utf8', low_memory=False)
 print('START: PREPARING AND VECTORIZING')
 vectorizer = prepareandfitvect(dataset)
-print('START: MODELLING DATASET')
-modelled_dataset = startup()
-print('START: RECOMMENDED COURSE')
-main()
+# print('START: MODELLING DATASET')
+# modelled_dataset = startup()
+# print('START: RECOMMENDED COURSE')
+# main()

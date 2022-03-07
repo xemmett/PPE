@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../unical"
+		},
+		{
+			"path": "../seez/automapper/seez_automapper"
+		}
+	],
+	"settings": {}
+}

@@ -74,3 +74,119 @@ e.g. book spider
     TUT > Tutorial: 71.32867132867133
 
     We see of the 143 modules that preserved their bom hours on the timetables, tutorials have become more popular.
+
+
+
+
+https://trainingmag.com/top-7-ways-artificial-intelligence-is-used-in-education/
+Universal access:
+    Educational classrooms can become globally available to all students through AI tools, even those that have hearing or visual impairment or speak different languages. With a PowerPoint plugin such as Presentation Translator, students have real-time subtitles for everything the teacher says. This opens up new possibilities for students who need to learn at different levels, who want to learn a subject unavailable in their school, or are sick and absent from schools. AI can break down the silos between traditional grade levels and schools.
+
+Conclusion:
+Anyone who’s informed about global trends across different industries will know that personalization is top of the list. This is due to the advent of artificial intelligence, which is an advantage for the education sector. AI helps teachers up their game, providing them all the information that they need. It also allows teachers to create content that suits their students best while ensuring personalized learning. It automates tasks, so teachers have more time to do more teaching and impact the students better.
+
+
+investigate pylint, creation of uml diagrams.
+
+tue 8 feb 2022:
+objective for now: get wikipedia data, subcategorise this and use the titles of academic disciplines and use that to categorise our courses.
+once we categorise the wiki disciplines, we can use the wiki trained model to categorise.
+but first lets look at the course names, see if we can deduct any categorisation from here. topic_modelling/coursename_cat.nbpy
+
+wed 16 2022:
+was testing inconsistent prerequisits on book of modules and found:
+https://bookofmodules.ul.ie/Default.aspx?ModuleCodeParameter=|CE4704| does not exist when
+https://bookofmodules.ul.ie/Default.aspx?ModuleCodeParameter=|CE4706| lists it as prerequisit
+also CE4704 does not exist in master data
+
+just realised I can do this:
+filter by year and click arrow to go through modules.
+can get any module ever all the way back to 1994/95
+
+a lot of documentation always refers to numerical analysis, simple searches like for removing outliers returns this
+
+2 march 22
+idea of what is wanted: similarity.py
+find term frequency, idea of how rare we wish to make key words
+test on small data set to find the big errors first to get an idea of what is optimal and 
+what variables to input so we can tweak easily.
+The idea is to create a lot of functions on which would be useful in preparing data, through doing text analysis in order to 
+have the available tools that would be useful in categorising corpus' using the textual data of course titles first.
+short string analysis may not be so useful when it comes to larger text data, but starting with course titles we can work our way up.
+some useful functions would be a term frequency index:
+
+corpus = [
+    'Bachelor of Arts in Applied Languages',
+    'Bachelor of Arts in Contemporary Dance',
+    'Bachelor of Arts in Criminal Justice',
+    'Bachelor of Arts in European Studies',
+    'Bachelor of Arts in International Business',
+    'Bachelor of Arts in International Insurance and European Studies',
+    'Bachelor of Arts in Irish Dance',
+    'Bachelor of Arts in Irish Music',
+    'Bachelor of Arts in Journalism and New Media',
+    'Bachelor of Arts in Law and Accounting',
+    'Bachelor of Arts in Psychology and Sociology',
+    'Bachelor of Arts in Voice',
+    'Bachelor of Arts in World Music',
+    'Bachelor of Business Studies',
+    'Bachelor of Business Studies with French',
+    'Bachelor of Business Studies with German',
+    'Bachelor of Business Studies with Japanese',
+    'Bachelor of Engineering in Aeronautical Engineering',
+    'Bachelor of Engineering in Biomedical Engineering',
+    'Bachelor of Engineering in Chemical and Biochemical Engineering',
+    'Bachelor of Engineering in Civil Engineering',
+    ]
+
+a dictionary of integers which are the number of instances and are keyworded by words present in a text corpus.
+{'bachelor': 21, 'of': 21, 'arts': 13, 'in': 17, 'applied': 1, 'languages': 1, 'contemporary': 1, 'dance': 2, 'criminal': 1, 'justice': 1, 'european': 2, 'studies': 6, 'international': 2, 'business': 5, 'insurance': 1, 'and': 5, 'irish': 2, 'music': 2, 'journalism': 1, 'new': 1, 'media': 1, 'law': 1, 'accounting': 1, 'psychology': 1, 'sociology': 1, 'voice': 1, 'world': 1, 'with': 3, 'french': 1, 'german': 1, 'japanese': 1, 'engineering': 8, 'aeronautical': 1, 'biomedical': 1, 'chemical': 1, 'biochemical': 1, 'civil': 1}
+
+bachelor :       15.909090909090908
+of :     15.909090909090908
+arts :   9.848484848484848
+in :     12.878787878787879
+applied :        0.7575757575757576
+languages :      0.7575757575757576
+contemporary :   0.7575757575757576
+dance :          1.5151515151515151
+criminal :       0.7575757575757576
+justice :        0.7575757575757576
+european :       1.5151515151515151
+studies :        4.545454545454546
+international :          1.5151515151515151
+business :       3.787878787878788
+insurance :      0.7575757575757576
+and :    3.787878787878788
+irish :          1.5151515151515151
+music :          1.5151515151515151
+journalism :     0.7575757575757576
+new :    0.7575757575757576
+media :          0.7575757575757576
+law :    0.7575757575757576
+accounting :     0.7575757575757576
+psychology :     0.7575757575757576
+sociology :      0.7575757575757576
+voice :          0.7575757575757576
+world :          0.7575757575757576
+with :   2.272727272727273
+french :         0.7575757575757576
+german :         0.7575757575757576
+japanese :       0.7575757575757576
+engineering :    6.0606060606060606
+aeronautical :   0.7575757575757576
+biomedical :     0.7575757575757576
+chemical :       0.7575757575757576
+biochemical :    0.7575757575757576
+civil :          0.7575757575757576
+
+looking at this output, we see that bachelor takes up 15% of the words present in the presented corpus.
+We will need our algorthim to identify rare terms itself, like engineering, aeronautical, chemical.
+We could easily say "find the lowest n terms", but terms like engineering, are quite far away from terms like aeronautical and chemical in frequency, although it is just as important in understanding the context.
+As "I study chemicals" and "I study chemical engineering", should not be both summarised as a chemical documents as the latter would also be an engineering document.
+
+We need to look at the larger picture, what terms and phrases are common among all engineering documents, same for chemical, mathematical, etc.
+after we got a big picture view, we can distinguish generally what the document is representing, we can go from there to narrow it down and even produce additional distinguishing keywords or topics
+
+continuing from the output above, we see non-useful words like with, in, of, bachelor are all very saturated. We will build our own function to gather stopwords, and remove them based on 
+how many times they appear per string, and over all.
