@@ -1,13 +1,16 @@
 # https://www.datacamp.com/community/tutorials/discovering-hidden-topics-python
 
+from pprint import pprint
 import matplotlib.pyplot as plt
 from pandas import read_csv, DataFrame
 
 import string
 
 from gensim import corpora
-from gensim.models import LsiModel
+from gensim.models import TfidfModel, LdaMulticore
 from gensim.models.coherencemodel import CoherenceModel
+
+import re
 
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
@@ -37,9 +40,7 @@ def open_data(filename=r"../../scrapers/qualifax_scraper/data/master_courses.csv
 
     dataset = read_csv(filename, encoding='utf8', low_memory=False)
 
-    columns = ['course_name',] 
-            #     'course_content',
-            #    'attendance_options', 'location_(districts)', 'careers_or_further_progression', ]
+    columns = ['course_name']
     df = DataFrame([], columns=columns)
     for c in columns:
         df[c] = dataset[c]
@@ -54,9 +55,9 @@ def open_data(filename=r"../../scrapers/qualifax_scraper/data/master_courses.csv
 
         fulldesc = fulldesc.lower()
         fulldesc = fulldesc.strip()
-        fulldesc = fulldesc.translate(
-            fulldesc.maketrans("", "", string.punctuation))
-
+        punctuation_pattern = "[^A-Za-z0-9' ]"
+        fulldesc = re.sub(punctuation_pattern, ' ', fulldesc) # remove punctuation
+        
         df['fulldesc'].iloc[index] = fulldesc
 
     cleaned_df = df[df['fulldesc'] != '']
@@ -67,7 +68,7 @@ def open_data(filename=r"../../scrapers/qualifax_scraper/data/master_courses.csv
     return documents, titles, cleaned_df
 
 
-class LsaModel():
+class TopicModel():
 
     def preprocess(self, documents=[], token_method='lemmatize'):
         """
@@ -101,8 +102,8 @@ class LsaModel():
         """
         # assign each unique term an index
         dictionary = corpora.Dictionary(cleaned_doc)
-
-        dictionary.filter_n_most_frequent(14)
+        
+        dictionary.filter_extremes(no_below=15, no_above=0.5, keep_n=100000)
         self.dictionary = dictionary
 
         doc_term_matrix = [dictionary.doc2bow(doc) for doc in cleaned_doc]
@@ -112,12 +113,17 @@ class LsaModel():
         dictionary, doc_term_matrix = self.prepare_corpus(cleaned_doc)
 
         # generate lsa model
-        lsamodel = LsiModel(doc_term_matrix, num_topics=number_of_topics,
-                            id2word=dictionary, power_iters=power_iters)
+        tfidf = TfidfModel(doc_term_matrix, dictionary=dictionary)
+        corpus_tfidf = tfidf[doc_term_matrix]
+
+        
+
+        # lsamodel = LsiModel(doc_term_matrix, num_topics=number_of_topics,
+        #                     id2word=dictionary, power_iters=power_iters)
         # print("\t>>Topics\n", lsamodel.print_topics(
         #     num_topics=number_of_topics, num_words=words))
 
-        return lsamodel
+        return corpus_tfidf
 
     def compute_coherence(self, dictionary, doc_term_matrix, cleaned_doc, start=2, stop=12, step=1):
         """ 
@@ -167,20 +173,11 @@ class LsaModel():
         self.model = self.create_gensim_lsa_model(
             self.documents, number_of_topics, num_words, power_iters=power_iters)
 
-lm = LsaModel(document_stop_index=7500)
+corpus_tfidf = TopicModel().model
 
-print(len(lm.training_docs))
+if(__name__ == "__main__"):
+    lda_tfidf = LdaMulticore(corpus=corpus_tfidf, num_topics=5)
 
-topics = lm.model.print_topics(num_topics=5, num_words=10)
-topic_indexes = [x[0] for x in topics]
-
-_, _, df = open_data()
-
-df['topic'] = ''
-df['similarity'] = ''
-
-print(lm.model.print_topics())
-for i, row in df[:5].iterrows():
-    new_text_corpus = lm.dictionary.doc2bow(row.fulldesc.split())
-    # lm.model[new_text_corpus]
-    print(lm.model[new_text_corpus])
+for idx, doc in lda_tfidf.print_topics(-1):
+    pprint(idx, doc)
+    break

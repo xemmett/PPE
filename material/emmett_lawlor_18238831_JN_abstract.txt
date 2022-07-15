@@ -1,0 +1,7 @@
+This projects builds on the recent shift the education industry underwent in result of the pandemic. By introducing blended learning to third level education, institutions will face problems never seen before; as more people apply to college, the more technology and automation we will need.
+
+As the demand for digital resources rise, students can contribute using university frameworks or data by creating web applications. I created a webapp compiled from UL course timetables, students visit http://unical.ie to get a custom downloadable calendar of their courses timetabled events. 
+
+As more people enrol in university, I wanted to help making a course easier by creating a tool which people could input a body of text and get recommended courses, removing the typical keyword search process seen today. Using the course directory of Qualifax, we can derive a training set to use in Machine Learning applications such as the recommendation tool.
+
+This project also investigates some trends in Irish education according to CAO, Qualifax and UL.

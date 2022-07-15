@@ -10,11 +10,10 @@ def download_file(url, filename):
         outfile.write(resobj)
 
 def create_dataset():
-    print()
     # 25 years worth of points
     url_base = "http://www2.cao.ie/app_scoring/points_stats/lc{}pts.pdf"
     filename_base = "test/lc{}pts.csv"
-    for i in range(1995, 2022):
+    for i in range(1995, 2023):
         
         year_str = str(i)[2:]
         url = url_base.format(year_str)
